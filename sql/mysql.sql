@@ -2,3 +2,10 @@ CREATE TABLE IF NOT EXISTS sessions (
     id           CHAR(72) PRIMARY KEY,
     session_data TEXT
 );
+CREATE TABLE IF NOT EXISTS entry (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title TEXT,
+    body TEXT,
+    ctime INT UNSIGNED NOT NULL,
+    utime INT UNSIGNED
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

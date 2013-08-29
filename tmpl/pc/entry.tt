@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+    <met charst="utf-8">
+    <title>labo - [% title|html %]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link media="all" rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" />
+    <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+    <style type="text/css">
+      #title { width: 400px; }
+      #content { width: 400px; height: 400px; }
+    </style>
+</head>
+<body onload="prettyPrint()">
+[% FOR entry IN entries %]
+  <h3 id="title">[% entry.title|html %]</h3>
+  <pre id="content" class="prettyprint"><code>[% entry.body|html %]</code></pre><br />
+[% END %]
+  <a href="/">back</a>
+</body>
+</html>

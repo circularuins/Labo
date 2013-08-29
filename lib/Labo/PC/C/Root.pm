@@ -5,7 +5,8 @@ use utf8;
 
 sub index {
     my ($class, $c) = @_;
-    $c->render('index.tt');
+    my @entries = $c->db->search('entry');
+    $c->render('index.tt', { entries => \@entries});
 }
 
 1;
