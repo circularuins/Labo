@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>js eval</title>
+    <script src="[% uri_for('/static/js/three.js') %]"></script>
+    <style type="text/css">
+      div#canvas-frame{
+      border: none;
+      cursor: pointer;
+      width: 600px;
+      height: 600px;
+      background-color: #EEEEEE;
+      }
+    </style>
+    <script>
+[% FOR entry IN entries %][% mark_raw(entry.body) %][% END %]
+    </script>
+  </head>
+  
+  <body onload="threeStart();">
+    <div id="canvas-frame"></div>
+[% FOR entry IN entries %]
+    <a href="[% uri_for('/entry/show',{ id => entry.id }) %]">back</a>
+[% END %]
+  </body>
+</html>

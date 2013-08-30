@@ -20,7 +20,7 @@
     </form>
 
 [% FOR entry IN entries %]
-    [% entry.id %]. [% entry.title %]. [% entry.body %]. [% entry.ctime_obj.strftime('%Y-%m-%d(%a) %H:%M') %]<br />
+    [% entry.ctime_obj.strftime('%Y-%m-%d(%a) %H:%M') %]. <a href="[% uri_for('/entry/show',{ id => entry.id }) %]">[% entry.title %]</a><br />
 [% END %]
 
   </body>

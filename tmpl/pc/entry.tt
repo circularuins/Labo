@@ -8,14 +8,22 @@
     <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
     <style type="text/css">
       #title { width: 400px; }
-      #content { width: 400px; height: 400px; }
+      #body { width: 400px; height: 360px; }
     </style>
 </head>
 <body onload="prettyPrint()">
+  <a href="/">Home</a>
 [% FOR entry IN entries %]
-  <h3 id="title">[% entry.title|html %]</h3>
-  <pre id="content" class="prettyprint"><code>[% entry.body|html %]</code></pre><br />
+  <form method="post" action="/entry/update">
+    <input type="hidden" name="id" value="[% entry.id %]">
+    <h3 id="title">[% entry.title|html %]</h3>
+    <pre id="content" class="prettyprint">[% entry.body|html %]</pre>
+    <a href="[% uri_for('/entry/js_eval',{ id => entry.id }) %]">JSを実行する</a><br /><br />
+    【編集】
+    <div><input type="text" name="title" id="title" maxlength="100" value="[% entry.title %]"></div>
+    <div><textarea name="body" id="body">[% entry.body|html %]</textarea></div>
+    <div><button type="submit" class="btn-inverse">更新</button></div>
+  </form>
 [% END %]
-  <a href="/">back</a>
 </body>
 </html>
