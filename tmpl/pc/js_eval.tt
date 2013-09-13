@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>js eval</title>
     <script src="[% uri_for('/static/js/three.js') %]"></script>
+    <script src="[% uri_for('/static/js/jquery-1.10.0.min.js') %]"></script>
     <style type="text/css">
       div#canvas-frame{
       border: none;
@@ -18,9 +19,8 @@
     </script>
   </head>
   
-  <body onload="threeStart();">
-    <div id="canvas-frame"></div>
-[% FOR entry IN entries %]
+  <body>
+[% FOR entry IN entries %][% mark_raw(entry.html_body) %]
     <a href="[% uri_for('/entry/show',{ id => entry.id }) %]">back</a>
 [% END %]
   </body>

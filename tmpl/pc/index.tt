@@ -7,15 +7,19 @@
       <style type="text/css">
         #title { width: 400px; }
         #content { width: 400px; height: 400px; }
+        #html_content { width: 400px; height: 200px; }
       </style>
   </head>
   <body>
-    <a href="http://circularuins.dyndns.org:3001/">go back to heaven...</a>
+    <a href="http://circularuins.dyndns.org:3001/">go back to heaven...</a><br /><br />
     <form action="/entry/create" method="post">
       <label for="title">Title:</label><br />
       <input id="title" name="title" type="text" value="[% title|escape %]" /><br />
       <label for="content">Content:</label><br />
+      <h3>JS</h3>
       <textarea id="content" name="content">[% content|escape %]</textarea><br />
+      <h3>HTML</h3>
+      <textarea id="html_content" name="html_content">[% html_content|escape %]</textarea><br />
       <input type="submit">
     </form>
 

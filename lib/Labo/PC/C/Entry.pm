@@ -8,14 +8,16 @@ use Data::Dumper;
 sub create {
     my ( $class, $c ) = @_;
     my $id;
-    if ( my $body = $c->request->param('content') ) {
+    if ( my $body = $c->request->param('content')) {
 #        $body =~ s%<br />%&lt;br /&gt;%g;
 #        $body =~ s%\r\n%<br />%g;
+        my $html_body = $c->request->param('html_content');
         if ( my $title = $c->request->param('title') ) {
             $id = $c->db->insert(
                 'entry' => {
                     title       => $title,
                     body        => $body,
+                    html_body   => $html_body,
                 }
             );
         }
@@ -24,6 +26,7 @@ sub create {
                 'entry' => {
                     title       => '無題',
                     body        => $body,
+                    html_body   => $html_body,
                 }
             );
         }
@@ -39,12 +42,14 @@ sub update {
     if ( my $body = $c->request->param('body') ) {
 #        $body =~ s%<br />%&lt;br /&gt;%g;
 #        $body =~ s%\r\n%<br />%g;
+        my $html_body = $c->request->param('html_body');
         my $now = time;
         if ( my $title = $c->request->param('title') ) {
             $c->db->update(
                 'entry' => {
                     title => $title,
                     body  => $body,
+                    html_body => $html_body,
                     utime => $now,
                 },
                 {
@@ -57,6 +62,7 @@ sub update {
                 'entry' => {
                     title => '無題',
                     body  => $body,
+                    html_body => $html_body,
                     utime => $now,
                 },
                 {
@@ -88,6 +94,16 @@ sub js_eval {
     my @entries = $c->db->search('entry', {'id' => $id});
 
     $c->render('js_eval.tt', { entries => \@entries });
+}
+
+sub delete_entry {
+    my ($class, $c) = @_;
+    my $query = $c->{request}->{env}->{QUERY_STRING};
+    my ($id) = $query =~ /id=(\d+)/;
+
+    $c->db->delete('entry', {'id' => $id});
+
+    return $c->redirect('/');
 }
 
 1;
